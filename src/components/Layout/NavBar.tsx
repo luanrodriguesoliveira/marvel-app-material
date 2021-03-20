@@ -12,23 +12,14 @@ import {
 
 import { useRouter } from 'next/router';
 
-import HomeIcon from '@material-ui/icons/Home';
-import Subscriptions from '@material-ui/icons/Subscriptions';
-import Whatshot from '@material-ui/icons/Whatshot';
-
-// const svgIcon = (
-//   <Icon>
-//     <img alt="edit" src="/images/cions/superhero.svg" />
-//   </Icon>
-// );
 const primaryMenu = [
   {
     id: 1,
-    label: 'Personagens',
+    label: 'PERSONAGENS',
     path: '/',
     icon: '/images/icons/superhero.png',
   },
-  { id: 2, label: 'Quadrinhos', path: '/comics', icon: '/images/icons/comic.png' },
+  { id: 2, label: 'QUADRINHOS', path: '/comics', icon: '/images/icons/comic.png' },
   {
     id: 3,
     label: 'Eventos',
@@ -65,11 +56,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NavBar() {
+export default function NavBar({ navBarState }) {
   const classes = useStyles();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const isSelected = item => router.pathname === item.path;
+  // const isSelected = item => router.pathname === item.path;
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
@@ -81,7 +72,7 @@ export default function NavBar() {
               key={item.id}
               button
               classes={{ root: classes.listItem }}
-              selected={isSelected(item)}
+              // selected={isSelected(item)}
             >
               <ListItemIcon>
                 <img className={classes.listItemIcon} src={iconSrc} />
@@ -100,10 +91,12 @@ export default function NavBar() {
   );
 
   return (
-    <Hidden mdDown>
-      <Drawer anchor="left" classes={{ paper: classes.desktopDrawer }} open variant="persistent">
-        {content}
-      </Drawer>
-    </Hidden>
+    <>
+      {navBarState ? (
+        <Drawer anchor="left" classes={{ paper: classes.desktopDrawer }} open variant="persistent">
+          {content}
+        </Drawer>
+      ) : null}
+    </>
   );
 }
