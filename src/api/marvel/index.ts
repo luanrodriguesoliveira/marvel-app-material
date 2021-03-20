@@ -2,8 +2,8 @@ import axios from 'axios';
 import { MD5 } from 'crypto-js';
 
 const ts = new Date().getTime();
-const publicKey = '02803c593f0b084ef83ff02382105ba8';
-const privateKey = '1a235f6438f7a411cc19cdaede0b704b9d4a8d79';
+const publicKey = process.env.PUB_KEY;
+const privateKey = process.env.PRIVATE_KEY;
 const msg = ts + privateKey + publicKey;
 const hash = MD5(msg);
 

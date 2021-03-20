@@ -19,11 +19,11 @@ const primaryMenu = [
     path: '/',
     icon: '/images/icons/superhero.png',
   },
-  { id: 2, label: 'QUADRINHOS', path: '/comics', icon: '/images/icons/comic.png' },
+  { id: 2, label: 'QUADRINHOS', path: '/soon', icon: '/images/icons/comic.png' },
   {
     id: 3,
     label: 'Eventos',
-    path: 'events',
+    path: '/soon',
     icon: '/images/icons/events.png',
   },
 ];
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavBar({ navBarState }) {
   const classes = useStyles();
-  // const router = useRouter();
+  const router = useRouter();
 
   // const isSelected = item => router.pathname === item.path;
 
@@ -73,6 +73,7 @@ export default function NavBar({ navBarState }) {
               button
               classes={{ root: classes.listItem }}
               // selected={isSelected(item)}
+              onClick={() => router.push(item.path)}
             >
               <ListItemIcon>
                 <img className={classes.listItemIcon} src={iconSrc} />

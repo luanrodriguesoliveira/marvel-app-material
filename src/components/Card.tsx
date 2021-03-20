@@ -1,13 +1,13 @@
 import { Box, Typography, makeStyles } from '@material-ui/core';
-import { useState, useEffect } from 'react';
 import Grow from '@material-ui/core/Grow';
+import { useRouter } from 'next/router';
 
 const styles = makeStyles({
   cardBox: {
     backgroundColor: '#000',
     display: 'flex',
     flexDirection: 'column',
-    padding: 8,
+    padding: 2,
     textAlign: 'center',
     cursor: 'pointer',
   },
@@ -30,13 +30,24 @@ const styles = makeStyles({
 
 export default function Card({ Item }) {
   const classes = styles();
+  const router = useRouter();
+
+  const handleImageClick = () => {
+    router.push(`/personagem/${Item.id}`);
+  };
 
   const thumbnail = Item.thumbnail.path + '/portrait_uncanny.' + Item.thumbnail.extension;
 
   return (
     <Grow in={true} timeout={500}>
       <Box className={classes.cardBox}>
-        <img className={classes.thumb} src={thumbnail} alt={Item.name} />
+        <img
+          className={classes.thumb}
+          src={thumbnail}
+          alt={Item.name}
+          onClick={() => handleImageClick()}
+        />
+
         <Typography variant="body1" className={classes.title}>
           {Item.name}
         </Typography>

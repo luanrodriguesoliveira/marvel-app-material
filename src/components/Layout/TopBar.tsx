@@ -8,10 +8,9 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
-import { useState } from 'react';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import { Hidden } from '@material-ui/core';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const drawerWidth = 240;
 
@@ -27,7 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     width: '100px',
-    paddingLeft: '20px',
+    paddingLeft: '10px',
+    cursor: 'pointer',
+  },
+  logoButton: {
+    cursor: 'pointer',
   },
   toolbar: {
     minHeight: 56,
@@ -67,6 +70,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function TopBar({ changeNavBar }) {
   const classes = useStyles();
+  const router = useRouter();
+
+  const [search, setSearch] = useState('');
 
   return (
     <AppBar className={classes.root}>
@@ -77,11 +83,13 @@ export default function TopBar({ changeNavBar }) {
               <MenuIcon />
             </Button>
           </Hidden>
-          <img className={classes.logo} src="/images/marvel-logo-white.png" />
+          <Button className={classes.logoButton} onClick={() => router.push(`/`)}>
+            <img className={classes.logo} src="/images/marvel-logo-white.png" />
+          </Button>
         </Box>
         <Hidden only={['xs', 'sm']}>
           <Box className={classes.menu}>
-            <Button color="inherit">
+            <Button color="inherit" onClick={() => router.push(`/`)}>
               <img className={classes.buttonIcon} src="/images/icons/superhero.png" alt="" />
               Personagens
             </Button>
@@ -101,10 +109,12 @@ export default function TopBar({ changeNavBar }) {
               className={classes.input}
               placeholder="Personagem"
               inputProps={{ 'aria-label': 'search google maps' }}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
             />
-            <IconButton type="submit" aria-label="search">
+            <Button onClick={() => router.push(`/search?query=${search}`)} aria-label="search">
               <SearchIcon />
-            </IconButton>
+            </Button>
           </Paper>
         </Box>
       </Toolbar>
