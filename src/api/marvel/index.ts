@@ -7,8 +7,6 @@ const privateKey = process.env.PRIVATE_KEY;
 const msg = ts + privateKey + publicKey;
 const hash = MD5(msg);
 
-console.log(publicKey);
-
 export const api = axios.create({
   baseURL: 'https://gateway.marvel.com/v1/public/',
   params: {
