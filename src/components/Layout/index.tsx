@@ -66,9 +66,7 @@ export default function Layout({ children }) {
         <div className={classes.wrapper}>
           <div className={classes.contentContainer}>
             <div className={classes.content}>{children}</div>
-            <Box className={classes.backgroundContainer}>
-              {/* <img src="/images/wandaback.jpg" alt="" /> */}
-            </Box>
+            <Box className={classes.backgroundContainer} />
           </div>
         </div>
       </div>

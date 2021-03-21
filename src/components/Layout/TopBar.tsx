@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     width: '100px',
     paddingLeft: '10px',
     cursor: 'pointer',
+    zIndex: 1000,
   },
   logoButton: {
     cursor: 'pointer',
@@ -94,15 +95,12 @@ export default function TopBar({ changeNavBar }) {
         <Hidden only={['xs', 'sm']}>
           <Box className={classes.menu}>
             <Button color="inherit" onClick={() => router.push(`/`)}>
-              {/* <img className={classes.buttonIcon} src="/images/icons/superhero.png" alt="" /> */}
               Personagens
             </Button>
-            <Button color="inherit">
-              {/* <img className={classes.buttonIcon} src="/images/icons/comic.png" alt="" /> */}
+            <Button color="inherit" onClick={() => router.push(`/notready`)}>
               Quadrinhos
             </Button>
-            <Button color="inherit">
-              {/* <img className={classes.buttonIcon} src="/images/icons/events.png" alt="" /> */}
+            <Button color="inherit" onClick={() => router.push(`/notready`)}>
               Eventos
             </Button>
           </Box>

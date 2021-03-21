@@ -5,8 +5,6 @@ import { api } from '../../api/marvel';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-import Grid from '@material-ui/core/Grid';
-import { useRouter } from 'next/router';
 
 const styles = makeStyles(theme => ({
   container: {
@@ -50,35 +48,31 @@ const styles = makeStyles(theme => ({
   comics: {
     marginTop: '40px',
   },
-  comicImage: {
-    cursor: 'pointer',
-  },
 }));
 
-export default function Personagem({ character, comics }) {
+export default function Quadrinho({ comic }) {
   const classes = styles();
-  const thumbnail = character.thumbnail.path + '/portrait_uncanny.' + character.thumbnail.extension;
-
-  const router = useRouter();
-
-  const handleImageClick = comicId => {
-    router.push(`/quadrinho/${comicId}`);
-  };
-
+  const thumbnail = comic.thumbnail.path + '/portrait_uncanny.' + comic.thumbnail.extension;
   const Content = (
     <>
       <Typography className={classes.title} variant="h2">
-        {character.name}
+        {comic.title}
       </Typography>
       <Typography className={classes.description} variant="h5">
-        {character.description == '' ? 'Descrição não disponível' : character.description}
+        {comic.description == null ? 'Descrição não disponível' : comic.description}
+      </Typography>
+      <Typography className={classes.description} variant="h5">
+        Número de páginas: {comic.pageCount}
+      </Typography>
+      <Typography className={classes.description} variant="h5">
+        Preço: $ {comic.prices[0].price}
       </Typography>
     </>
   );
   return (
     <>
       <Head>
-        <title>{character.name}</title>
+        <title>{comic.title}</title>
       </Head>
       <Layout>
         <Box display="flex" className={classes.container}>
@@ -90,50 +84,19 @@ export default function Personagem({ character, comics }) {
             <Hidden only={['xs']}>{Content}</Hidden>
           </Box>
         </Box>
-        <Box
-          className={classes.comics}
-          display="flex"
-          justifyContent="center"
-          flexDirection="column"
-          textAlign="center"
-        >
-          <Typography variant="h6">Esteve em:</Typography>
-          <Box mt="30px">
-            <Grid container>
-              {comics.map(item => (
-                <Grid item key={item.id} xl={2} lg={3} md={3} sm={4} xs={6}>
-                  <img
-                    src={item.thumbnail.path + '/portrait_fantastic.' + item.thumbnail.extension}
-                    onClick={() => handleImageClick(item.id)}
-                    className={classes.comicImage}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Box>
       </Layout>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-  const { data: fetchCharacter } = await api.get(`/characters/${context.params.id}`);
+  const { data: fetch } = await api.get(`/comics/${context.params.id}`);
 
-  const character = fetchCharacter.data.results[0];
-
-  const { data: fetchComics } = await api.get(`/comics`, {
-    params: {
-      characters: context.params.id,
-    },
-  });
-
-  const comics = fetchComics.data.results;
+  const comic = fetch.data.results[0];
 
   return {
     props: {
-      character: character,
-      comics: comics,
+      comic: comic,
     },
   };
 }

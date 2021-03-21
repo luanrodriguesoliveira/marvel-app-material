@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 const primaryMenu = [
   {
     id: 1,
-    label: 'PERSONAGENS',
+    label: 'Personagens',
     path: '/',
     icon: '/images/icons/superhero.png',
   },

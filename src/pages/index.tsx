@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { api } from '../api/marvel';
 import Pagination from '@material-ui/lab/Pagination';
 
-export default function Index({ data, page }) {
+export default function Index({ data, page, count }) {
   const router = useRouter();
 
   return (
@@ -26,7 +26,7 @@ export default function Index({ data, page }) {
           <Box mt="50px" display="flex" justifyContent="center">
             <Pagination
               page={page}
-              count={5}
+              count={count}
               onChange={(event, nextPage) => router.push(`?page=${nextPage}`)}
               color="primary"
             />
@@ -38,21 +38,23 @@ export default function Index({ data, page }) {
 }
 
 export async function getServerSideProps({ query: { page = 1 } }) {
-  const offset = +page === 1 ? 1 : (+page - 1) * 12 + 1;
+  const offset = +page === 1 ? 0 : (+page - 1) * 12;
 
   const { data: fetch } = await api.get('/characters', {
     params: {
       offset: offset,
-      events: 310,
     },
   });
 
   const data = fetch.data.results;
 
+  const count = Math.floor(+fetch.data.total / 12);
+
   return {
     props: {
       data: data,
       page: +page,
+      count: +count,
     },
   };
 }
