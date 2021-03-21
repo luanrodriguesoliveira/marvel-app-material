@@ -41,6 +41,7 @@ export default function Search({ data, resultsNumber, page, count, query }) {
 export async function getServerSideProps({ query: { query = '', page = 1 } }) {
   const params = {};
   params['offset'] = +page === 1 ? 0 : (+page - 1) * 12;
+  params['limit'] = 12;
   query !== '' ? (params['nameStartsWith'] = query) : null;
   const { data: fetch } = await api.get('/characters', {
     params,
@@ -49,7 +50,6 @@ export async function getServerSideProps({ query: { query = '', page = 1 } }) {
   const data = fetch.data.results;
   const resultsNumber = fetch.data.total;
   const count = Math.round(+fetch.data.total / 10);
-  console.log(count);
 
   return {
     props: {

@@ -79,6 +79,11 @@ export default function TopBar({ changeNavBar }) {
 
   const [search, setSearch] = useState('');
 
+  const handleSubmitButton = e => {
+    e.preventDefault();
+    router.push(`/search?query=${search}`);
+  };
+
   return (
     <AppBar className={classes.root}>
       <Toolbar className={classes.toolbar}>
@@ -114,7 +119,7 @@ export default function TopBar({ changeNavBar }) {
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            <Button onClick={() => router.push(`/search?query=${search}`)} aria-label="search">
+            <Button type="submit" onClick={e => handleSubmitButton(e)} aria-label="search">
               <SearchIcon />
             </Button>
           </Paper>

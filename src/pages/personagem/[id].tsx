@@ -52,6 +52,7 @@ const styles = makeStyles(theme => ({
   },
   comicImage: {
     cursor: 'pointer',
+    border: '2px solid #000',
   },
 }));
 
