@@ -20,14 +20,24 @@ const styles = makeStyles(theme => ({
     },
   },
   image: {
-    marginRight: '25px',
     border: '4px solid #000',
+    alignSelf: 'center',
   },
   title: {
+    marginLeft: '30px',
     textTransform: 'uppercase',
     fontWeight: 500,
     [theme.breakpoints.down('sm')]: {
       fontSize: '50px',
+    },
+    [theme.breakpoints.only('xs')]: {
+      marginLeft: 0,
+    },
+  },
+  description: {
+    marginLeft: '30px',
+    [theme.breakpoints.only('xs')]: {
+      marginLeft: 0,
     },
   },
 }));
@@ -40,7 +50,9 @@ export default function Personagem({ data }) {
       <Typography className={classes.title} variant="h2">
         {data.name}
       </Typography>
-      <Typography variant="h5">{data.description}</Typography>
+      <Typography className={classes.description} variant="h5">
+        {data.description}
+      </Typography>
     </>
   );
   return (
