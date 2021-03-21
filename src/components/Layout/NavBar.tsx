@@ -15,15 +15,15 @@ import { useRouter } from 'next/router';
 const primaryMenu = [
   {
     id: 1,
-    label: 'Personagens',
+    label: 'PERSONAGENS',
     path: '/',
     icon: '/images/icons/superhero.png',
   },
-  { id: 2, label: 'QUADRINHOS', path: '/soon', icon: '/images/icons/comic.png' },
+  { id: 2, label: 'QUADRINHOS', path: '/notready', icon: '/images/icons/comic.png' },
   {
     id: 3,
-    label: 'Eventos',
-    path: '/soon',
+    label: 'EVENTOS',
+    path: '/notready',
     icon: '/images/icons/events.png',
   },
 ];
@@ -66,7 +66,6 @@ export default function NavBar({ navBarState }) {
     <Box height="100%" display="flex" flexDirection="column">
       <List>
         {primaryMenu.map(item => {
-          const iconSrc = item.icon;
           return (
             <ListItem
               key={item.id}
@@ -75,9 +74,7 @@ export default function NavBar({ navBarState }) {
               // selected={isSelected(item)}
               onClick={() => router.push(item.path)}
             >
-              <ListItemIcon>
-                <img className={classes.listItemIcon} src={iconSrc} />
-              </ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <ListItemText
                 classes={{
                   primary: classes.listItemText,
