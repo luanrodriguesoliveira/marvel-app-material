@@ -48,6 +48,10 @@ const useStyles = makeStyles(theme => ({
       width: 200,
       marginLeft: 60,
     },
+    [theme.breakpoints.only('xs')]: {
+      width: 180,
+      marginLeft: 60,
+    },
   },
   input: {
     flex: 1,
