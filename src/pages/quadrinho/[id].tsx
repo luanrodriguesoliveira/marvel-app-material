@@ -15,7 +15,7 @@ const styles = makeStyles(theme => ({
     justifyContent: 'center',
     marginLeft: '200px',
     marginRight: '200px',
-    marginTop: '100px',
+    marginTop: '20px',
     alignItems: 'center',
     [theme.breakpoints.down('lg')]: {
       marginLeft: 0,
@@ -30,9 +30,6 @@ const styles = makeStyles(theme => ({
     textTransform: 'uppercase',
     fontWeight: 500,
     textAlign: 'left',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '50px',
-    },
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
       marginTop: '20px',
@@ -41,11 +38,13 @@ const styles = makeStyles(theme => ({
   },
   description: {
     marginLeft: '30px',
+    marginTop: '20px',
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
       textAlign: 'center',
     },
     textAlign: 'justify',
+    fontSize: '15px',
   },
   comics: {
     marginTop: '40px',
@@ -75,16 +74,16 @@ export default function Quadrinho({ comic, characters }) {
   };
   const Content = (
     <>
-      <Typography className={classes.title} variant="h3">
+      <Typography className={classes.title} variant="h6">
         {comic.title}
       </Typography>
-      <Typography className={classes.description} variant="h5">
+      <Typography className={classes.description}>
         {comic.description == null ? 'Descrição não disponível' : comic.description}
       </Typography>
-      <Typography className={classes.category} variant="h5">
+      <Typography className={classes.category} variant="h6">
         Número de páginas: {comic.pageCount}
       </Typography>
-      <Typography className={classes.category} variant="h5">
+      <Typography className={classes.category} variant="h6">
         Preço: $ {comic.prices[0].price}
       </Typography>
     </>

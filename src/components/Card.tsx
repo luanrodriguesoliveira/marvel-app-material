@@ -1,8 +1,9 @@
 import { Box, Typography, makeStyles } from '@material-ui/core';
 import Grow from '@material-ui/core/Grow';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-const styles = makeStyles({
+const styles = makeStyles(theme => ({
   cardBox: {
     backgroundColor: '#000',
     display: 'flex',
@@ -10,12 +11,16 @@ const styles = makeStyles({
     padding: 2,
     textAlign: 'center',
     cursor: 'pointer',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      backgroundColor: '#EE171F',
+    },
   },
   thumb: {
-    filter: 'grayscale(100%)',
-    '&:hover': {
-      filter: 'none',
-    },
+    // filter: 'grayscale(100%)',
+    // '&:hover': {
+    //   filter: 'none',
+    // },
   },
   title: {
     color: '#FFF',
@@ -26,7 +31,7 @@ const styles = makeStyles({
     overflow: 'hidden',
     fontWeight: 500,
   },
-});
+}));
 
 export default function Card({ Item }) {
   const classes = styles();

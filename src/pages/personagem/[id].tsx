@@ -30,9 +30,6 @@ const styles = makeStyles(theme => ({
     textTransform: 'uppercase',
     fontWeight: 500,
     textAlign: 'left',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '50px',
-    },
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
       marginTop: '20px',
@@ -41,11 +38,13 @@ const styles = makeStyles(theme => ({
   },
   description: {
     marginLeft: '30px',
+    marginTop: '20px',
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
       textAlign: 'center',
     },
     textAlign: 'justify',
+    fontSize: '15px',
   },
   comics: {
     marginTop: '40px',
@@ -68,10 +67,10 @@ export default function Personagem({ character, comics }) {
 
   const Content = (
     <>
-      <Typography className={classes.title} variant="h2">
+      <Typography className={classes.title} variant="h6">
         {character.name}
       </Typography>
-      <Typography className={classes.description} variant="h5">
+      <Typography className={classes.description}>
         {character.description == '' ? 'Descrição não disponível' : character.description}
       </Typography>
     </>
@@ -98,7 +97,7 @@ export default function Personagem({ character, comics }) {
           flexDirection="column"
           textAlign="center"
         >
-          <Typography variant="h6">Esteve em:</Typography>
+          <Typography variant="h6">Apareceu em</Typography>
           <Box mt="30px">
             <Grid container>
               {comics.map(item => (
