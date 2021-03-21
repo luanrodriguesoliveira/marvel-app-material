@@ -1,6 +1,6 @@
 # Marvel App
 
-## Projeto feito com NextJs :fa-heart:
+## Projeto feito com NextJs :smile:
 
 ![](https://i.ibb.co/34M84VF/image.png)
 
