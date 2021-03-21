@@ -5,11 +5,13 @@ import { api } from '../../api/marvel';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
+import Grid from '@material-ui/core/Grid';
 
 const styles = makeStyles(theme => ({
   container: {
     overflow: 'hidden',
     padding: 8,
+    justifyContent: 'center',
     marginLeft: '200px',
     marginRight: '200px',
     marginTop: '100px',
@@ -21,7 +23,6 @@ const styles = makeStyles(theme => ({
   },
   image: {
     border: '4px solid #000',
-    alignSelf: 'center',
   },
   title: {
     marginLeft: '30px',
@@ -32,6 +33,7 @@ const styles = makeStyles(theme => ({
     },
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
+      marginTop: '20px',
     },
   },
   description: {
@@ -39,19 +41,23 @@ const styles = makeStyles(theme => ({
     [theme.breakpoints.only('xs')]: {
       marginLeft: 0,
     },
+    textAlign: 'center',
+  },
+  comics: {
+    marginTop: '40px',
   },
 }));
 
-export default function Personagem({ data }) {
+export default function Personagem({ character, comics }) {
   const classes = styles();
-  const thumbnail = data.thumbnail.path + '/portrait_uncanny.' + data.thumbnail.extension;
+  const thumbnail = character.thumbnail.path + '/portrait_uncanny.' + character.thumbnail.extension;
   const Content = (
     <>
       <Typography className={classes.title} variant="h2">
-        {data.name}
+        {character.name}
       </Typography>
       <Typography className={classes.description} variant="h5">
-        {data.description}
+        {character.description == '' ? 'Descrição não disponível' : character.description}
       </Typography>
     </>
   );
@@ -70,19 +76,48 @@ export default function Personagem({ data }) {
             <Hidden only={['xs']}>{Content}</Hidden>
           </Box>
         </Box>
+        <Box
+          className={classes.comics}
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          textAlign="center"
+        >
+          <Typography variant="h6">Esteve em:</Typography>
+          <Box mt="30px">
+            <Grid container>
+              {comics.map(item => (
+                <Grid item key={item.id} xl={2} lg={3} md={3} sm={4} xs={6}>
+                  <img
+                    src={item.thumbnail.path + '/portrait_fantastic.' + item.thumbnail.extension}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Box>
       </Layout>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-  const { data: fetch } = await api.get(`/characters/${context.params.id}`);
+  const { data: fetchCharacter } = await api.get(`/characters/${context.params.id}`);
 
-  const data = fetch.data.results[0];
+  const character = fetchCharacter.data.results[0];
+
+  const { data: fetchComics } = await api.get(`/comics`, {
+    params: {
+      characters: context.params.id,
+    },
+  });
+
+  const comics = fetchComics.data.results;
 
   return {
     props: {
-      data: data,
+      character: character,
+      comics: comics,
     },
   };
 }
