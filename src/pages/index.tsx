@@ -1,11 +1,10 @@
 import Layout from '../components/Layout';
 import Head from 'next/head';
-import { Box, Grid, Button } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import Card from '../components/Card';
 import { useRouter } from 'next/router';
 import { api } from '../api/marvel';
 import Pagination from '@material-ui/lab/Pagination';
-import { useState } from 'react';
 
 export default function Index({ data, page }) {
   const router = useRouter();

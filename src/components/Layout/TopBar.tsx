@@ -90,15 +90,15 @@ export default function TopBar({ changeNavBar }) {
         <Hidden only={['xs', 'sm']}>
           <Box className={classes.menu}>
             <Button color="inherit" onClick={() => router.push(`/`)}>
-              <img className={classes.buttonIcon} src="/images/icons/superhero.png" alt="" />
+              {/* <img className={classes.buttonIcon} src="/images/icons/superhero.png" alt="" /> */}
               Personagens
             </Button>
             <Button color="inherit">
-              <img className={classes.buttonIcon} src="/images/icons/comic.png" alt="" />
+              {/* <img className={classes.buttonIcon} src="/images/icons/comic.png" alt="" /> */}
               Quadrinhos
             </Button>
             <Button color="inherit">
-              <img className={classes.buttonIcon} src="/images/icons/events.png" alt="" />
+              {/* <img className={classes.buttonIcon} src="/images/icons/events.png" alt="" /> */}
               Eventos
             </Button>
           </Box>

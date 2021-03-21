@@ -35,13 +35,17 @@ const useStyles = makeStyles(theme => ({
   },
   backgroundContainer: {
     zIndex: -1,
-    position: 'fixed',
+    position: 'absolute',
     left: 0,
     top: 0,
+    width: '100%',
+    height: '100vh',
     maxWidth: '100%',
     overflow: 'hidden',
     maxHeight: '100vh',
+    backgroundImage: 'url(/images/background-image.jpg)',
     backgroundAttachment: 'fixed',
+    backgroundSize: '100%',
   },
 }));
 
@@ -63,7 +67,7 @@ export default function Layout({ children }) {
           <div className={classes.contentContainer}>
             <div className={classes.content}>{children}</div>
             <Box className={classes.backgroundContainer}>
-              <img src="/images/wandaback.jpg" alt="" />
+              {/* <img src="/images/wandaback.jpg" alt="" /> */}
             </Box>
           </div>
         </div>

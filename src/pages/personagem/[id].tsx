@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Head from 'next/head';
 import Box from '@material-ui/core/Box';
@@ -20,7 +19,12 @@ const styles = makeStyles(theme => ({
     },
   },
   image: {
-    paddingRight: '30px',
+    marginRight: '25px',
+    border: '4px solid #000',
+  },
+  title: {
+    textTransform: 'uppercase',
+    fontWeight: 500,
   },
 }));
 
@@ -38,7 +42,9 @@ export default function Personagem({ data }) {
             <img className={classes.image} src={thumbnail} />
           </Box>
           <Box display="flex" justifyContent="center" flexDirection="column" textAlign="justify">
-            <Typography variant="h2">{data.name}</Typography>
+            <Typography className={classes.title} variant="h2">
+              {data.name}
+            </Typography>
             <Typography variant="h5">{data.description}</Typography>
           </Box>
         </Box>
